@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Trading Bot Status</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function updateData() {
+      try {
+        const res = await fetch("https://machine-learning-trading-ai-default-rtdb.firebaseio.com/bot.json");
+        const data = await res.json();
+        document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById("output").innerText = "Error fetching data";
+      }
+    }
+
+    // Update every 5 seconds
+    setInterval(updateData, 5000);
+    updateData(); // initial load
+  </script>
+</body>
+</html>
